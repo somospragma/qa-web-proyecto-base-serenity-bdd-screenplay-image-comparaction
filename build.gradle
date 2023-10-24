@@ -1,0 +1,81 @@
+defaultTasks 'clean', 'test', 'aggregate'
+
+group = 'co.com.pragma'
+version = '1.0-SNAPSHOT'
+repositories {
+    mavenLocal()
+    jcenter()
+}
+
+buildscript {
+    repositories {
+        mavenLocal()
+        jcenter()
+    }
+    dependencies {
+        classpath("net.serenity-bdd:serenity-gradle-plugin:2.2.8")
+        classpath "net.serenity-bdd:serenity-single-page-report:2.2.8"
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'net.serenity-bdd.aggregator'
+
+//sourceCompatibility = 11
+//targetCompatibility = 11
+
+ext {
+    slf4jVersion = '1.7.7'
+    serenityCoreVersion = '3.4.1'
+    junitVersion = '4.13'
+    assertJVersion = '3.8.0'
+    logbackVersion = '1.2.3'
+    jsonSchemaValidatorVersion = '3.0.7'
+    jsonPath = '4.3.2'
+    lombokVersion = '1.18.16'
+    javaFakerVersion = '1.0.2'
+    serenityCucumberVersion = '3.4.1'
+    jacksonVersion = '2.14.0'
+}
+
+dependencies {
+    implementation group: 'org.slf4j', name: 'slf4j-simple', version: '1.7.25'
+    implementation 'org.apache.logging.log4j:log4j-api:2.19.0'
+    implementation 'org.apache.logging.log4j:log4j-core:2.19.0'
+    implementation "net.serenity-bdd:serenity-core:${serenityCoreVersion}",
+            "net.serenity-bdd:serenity-screenplay:${serenityCoreVersion}",
+            "net.serenity-bdd:serenity-screenplay-rest:${serenityCoreVersion}",
+            "net.serenity-bdd:serenity-screenplay-webdriver:${serenityCoreVersion}",
+            "net.serenity-bdd:serenity-ensure:${serenityCoreVersion}"
+    implementation "com.fasterxml.jackson.core:jackson-core:${jacksonVersion}",
+            "com.fasterxml.jackson.core:jackson-databind:${jacksonVersion}",
+            "com.fasterxml.jackson.core:jackson-annotations:${jacksonVersion}"
+    testImplementation "net.serenity-bdd:serenity-cucumber:${serenityCucumberVersion}",
+            "junit:junit:${junitVersion}",
+            "org.hamcrest:hamcrest-all:1.3"
+
+
+    //Image Comparison
+    implementation 'com.github.romankh3:image-comparison:4.4.0'
+
+    // https://mvnrepository.com/artifact/net.lightbody.bmp/browsermob-core
+    implementation ('net.lightbody.bmp:browsermob-core:2.1.5') {
+        exclude group: 'io.netty', module: 'netty-all'
+    }
+}
+
+test {
+    testLogging.showStandardStreams = true
+    maxParallelForks=8
+    systemProperties System.getProperties()
+}
+
+serenity {
+    reports = ["single-page-html"]
+}
+
+gradle.startParameter.continueOnFailure = true
+
+test.finalizedBy(aggregate)
