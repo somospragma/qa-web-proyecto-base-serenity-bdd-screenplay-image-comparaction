@@ -1,5 +1,6 @@
 package co.com.pragma.tasks;
 
+import co.com.pragma.utils.ProjectProperties;
 import com.github.romankh3.image.comparison.ImageComparison;
 import com.github.romankh3.image.comparison.ImageComparisonUtil;
 import com.github.romankh3.image.comparison.model.ImageComparisonResult;
@@ -13,7 +14,7 @@ import java.util.function.Consumer;
 
 public class CompareImage implements Task {
 
-    private String pathToSave = "src/test/resources/results/result.png";
+    private String pathToSave = ProjectProperties.getPathToSaveResult();
 
     private ImageComparison imageComparison;
     private ImageComparisonResult result;

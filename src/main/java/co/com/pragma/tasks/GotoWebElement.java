@@ -1,5 +1,6 @@
 package co.com.pragma.tasks;
 
+import co.com.pragma.utils.ProjectProperties;
 import co.com.pragma.utils.compareImagen.ScreenshotProvider;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Task;
@@ -16,7 +17,7 @@ public class GotoWebElement implements Task {
 
 
     public  Target webElement;
-    private String pathToSave = "src/test/resources/data/screenshot/capture.png";
+    private String pathToSave = ProjectProperties.getPathToSaveScreenshot();
 
     public GotoWebElement(Target webElement) {
         this.webElement = webElement;
