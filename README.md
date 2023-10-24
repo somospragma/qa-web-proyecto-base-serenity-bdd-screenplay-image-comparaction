@@ -2,7 +2,7 @@
 
 ## Image Comparison
 ### About:
-This is a library available to perform absolute comparison tests between images. Note that the concept of absolute comparison is based on the evaluation of pixel-by-pixel values between the images involved, which brings limitations to the testing.
+This is a library available to perform absolute comparison tests between images. Note that the concept of absolute comparison is based on the evaluation of pixel-by-pixel values between the images involved, which brings limitations to the testing, however, it provides a perfect use for test images.
 ### Source
 https://github.com/romankh3/image-comparison
 ### Use of archetype and image comparison classes
