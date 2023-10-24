@@ -40,6 +40,11 @@ To use this implementation in your projects, you need to create the following fo
 | differenceRectangleColor                | Rectangle color of image difference. By default, it's red.       |
 | excludedRectangleColor                  | Rectangle color of excluded part. By default, it's green.        |
 
+### Response type 
+the implementation provides a response type to validate the result of the comparison, this response type is called *getImageComparisonState* and it can be the following states:
+* MATCH : minds that the images are the same
+* MISSMATCH : minds that the images are different
+* SIZE_MISSMATCH : minds that the images have different size
 
 
 
